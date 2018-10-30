@@ -4,11 +4,20 @@ public class Vector3D {
 	private float x;
 	private float y;
 	private float z;
+	private float magnitude;
 	
 	public Vector3D() {
 		this.x = 0;
 		this.y = 0;
 		this.z = 0;
+		this.magnitude = 0;
+	}
+	
+	public Vector3D(float x, float y, float z) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+		this.magnitude = magnitude(x, y, z);
 	}
 	
 	/**  TODO The methods below will mutate the instance as well as return it **/
@@ -47,8 +56,39 @@ public class Vector3D {
 		return null;
 	}
 	
+	public float magnitude(float x, float y, float z) {
+		magnitude = sumOfSquares(x, y, z);
+		magnitude = (float) Math.sqrt(magnitude);
+		return this.magnitude;
+	}
+	
+	/** Getters and setters for x, y, and z values of Vector3D **/
+	public void setX(float x) {
+		this.x = x;
+	}
+	
+	public float getX() {
+		return this.x;
+	}	
+	
+	public void setY(float y) {
+		this.y = y;
+	}
+	
+	public float getY() {
+		return this.y;	
+	}	
+	
+	public void setZ(float z) {
+		this.z = z;
+	}
+	
+	public float getZ() {
+		return this.z;
+	}
+	
 	public String toString() {
-		return "";
+		return "Vector -> (" + this.x + ", "  + this.y + ", " + this.z + ") magnitude = " + this.magnitude;
 	}
 	
 	/** TODO other methods that do not mutate or return instances of the Vector class **/
@@ -67,5 +107,11 @@ public class Vector3D {
 		this.x = x;
 		this.y = y;
 		this.z = z;
+	}
+	
+	/**  Helper functions for math functions  **/
+	private float sumOfSquares(float x, float y, float z) {
+		float sumOfSquares = (x*x + y*y + z*z);		
+		return sumOfSquares;
 	}
 }

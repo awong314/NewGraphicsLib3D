@@ -4,29 +4,33 @@ public class Vector3D {
 	private float x;
 	private float y;
 	private float z;
-	private float magnitude;
 	
 	public Vector3D() {
 		this.x = 0;
 		this.y = 0;
 		this.z = 0;
-		this.magnitude = 0;
 	}
 	
 	public Vector3D(float x, float y, float z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
-		this.magnitude = magnitude(x, y, z);
 	}
 	
 	/**  TODO The methods below will mutate the instance as well as return it **/
 	
 	public Vector3D normalize() {
+		float temp = this.mag(); //store initial magnitude of vector to divide x,y,z
+		this.setX(getX() / temp);
+		this.setY(getY() / temp);
+		this.setZ(getZ() / temp);
 		return this;
 	}
 	
-	public Vector3D scale(float scaler) {
+	public Vector3D scale(float scalar) {
+		this.setX(getX() * scalar);
+		this.setY(getY() * scalar);
+		this.setZ(getZ() * scalar);
 		return this;
 	}
 	
@@ -37,11 +41,19 @@ public class Vector3D {
 	}
 	
 	public Vector3D add(Vector3D vec2) {
-		return null;
+		Vector3D result = new Vector3D();
+		result.setX(this.x + vec2.getX());
+		result.setY(this.y + vec2.getY());
+		result.setZ(this.z + vec2.getZ());
+		return result;
 	}
 	
 	public Vector3D sub(Vector3D vec2) {
-		return null;
+		Vector3D result = new Vector3D();
+		result.setX(this.x - vec2.getX());
+		result.setY(this.y - vec2.getY());
+		result.setZ(this.z - vec2.getZ());
+		return result;
 	}
 	
 	public Vector3D div(Vector3D vec2) {
@@ -56,10 +68,12 @@ public class Vector3D {
 		return null;
 	}
 	
-	public float magnitude(float x, float y, float z) {
-		magnitude = sumOfSquares(x, y, z);
-		magnitude = (float) Math.sqrt(magnitude);
-		return this.magnitude;
+	public float mag() {
+		float temp = 0.0f;
+		float mag = temp;
+		temp = sumOfSquares(x, y, z);
+		mag = (float) Math.sqrt(temp);
+		return mag;
 	}
 	
 	/** Getters and setters for x, y, and z values of Vector3D **/
@@ -88,7 +102,7 @@ public class Vector3D {
 	}
 	
 	public String toString() {
-		return "Vector -> (" + this.x + ", "  + this.y + ", " + this.z + ") magnitude = " + this.magnitude;
+		return "Vector -> (" + this.x + ", "  + this.y + ", " + this.z + ") magnitude = " + mag();
 	}
 	
 	/** TODO other methods that do not mutate or return instances of the Vector class **/

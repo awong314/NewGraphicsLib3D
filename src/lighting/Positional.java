@@ -1,6 +1,6 @@
 package lighting;
 
-import graphicslib3D.Vector3D;
+import Math.Vector3D;
 
 public class Positional extends Light {
 	private float[] direction;

@@ -1,4 +1,4 @@
-package a3.lighting;
+package lighting;
 
 import graphicslib3D.Vector3D;
 

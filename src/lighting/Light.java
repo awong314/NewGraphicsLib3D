@@ -1,4 +1,4 @@
-package a3.lighting;
+package lighting;
 
 public abstract class Light {
 	private RGBa ambient;

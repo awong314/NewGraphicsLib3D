@@ -1,4 +1,4 @@
-package a3.lighting;
+package lighting;
 
 public class RGBa {
 	private float red, green, blue, alpha;

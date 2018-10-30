@@ -1,4 +1,4 @@
-package a3.lighting;
+package lighting;
 
 public class Ambient extends Light {
 	public Ambient() {

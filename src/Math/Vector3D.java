@@ -17,7 +17,7 @@ public class Vector3D {
 		this.z = z;
 	}
 	
-	/**  TODO The methods below will mutate the instance as well as return it **/
+	/**  The methods below will mutate the instance as well as return it **/
 	
 	public Vector3D normalize() {
 		float temp = this.mag(); //store initial magnitude of vector to divide x,y,z
@@ -34,12 +34,7 @@ public class Vector3D {
 		return this;
 	}
 	
-	/**  TODO The methods below will NOT mutate the instance and return new Vector3D **/
-	
-	public Vector3D mult(Vector3D vec2) {
-		return null;
-	}
-	
+	/**  The methods below will NOT mutate the instance and return new Vector3D **/
 	public Vector3D add(Vector3D vec2) {
 		Vector3D result = new Vector3D();
 		result.setX(this.x + vec2.getX());
@@ -54,10 +49,6 @@ public class Vector3D {
 		result.setY(this.y - vec2.getY());
 		result.setZ(this.z - vec2.getZ());
 		return result;
-	}
-	
-	public Vector3D div(Vector3D vec2) {
-		return null;
 	}
 	
 	public float dot(Vector3D vec2) {
@@ -77,6 +68,28 @@ public class Vector3D {
 	public float mag() {
 		float mag = (float) Math.sqrt(sumOfSquares(x, y, z));
 		return mag;
+	}
+	
+	/** Other methods that do not mutate or return instances of the Vector class **/
+	public float angleBetween(Vector3D vec2) {
+		float angle = 0.0f;
+		angle = (float) Math.acos(((this.x * vec2.getX()) + (this.y * vec2.getY()) + (this.z * vec2.getZ())) / (this.mag() * vec2.mag()));
+		return angle;
+	}
+	
+	public float[] getDirection() {
+		return new float[] {x, y, z};
+	}
+	
+	public void setDirection(float x, float y, float z) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+	}
+	
+	private float sumOfSquares(float x, float y, float z) {
+		float sumOfSquares = (x*x + y*y + z*z);		
+		return sumOfSquares;
 	}
 	
 	/** Getters and setters for x, y, and z values of Vector3D **/
@@ -106,30 +119,5 @@ public class Vector3D {
 	
 	public String toString() {
 		return "Vector -> (" + this.x + ", "  + this.y + ", " + this.z + ") magnitude = " + mag();
-	}
-	
-	/** TODO other methods that do not mutate or return instances of the Vector class **/
-	public float angleBetween(Vector3D vec2) {
-		float angle = 0.0f;
-		angle = (float) Math.acos(((this.x * vec2.getX()) + (this.y * vec2.getY()) + (this.z * vec2.getZ())) / (this.mag() * vec2.mag()));
-		return angle;
-	}
-	
-	/**  The Methods below are done  **/
-	
-	public float[] getDirection() {
-		return new float[] {x, y, z};
-	}
-	
-	public void setDirection(float x, float y, float z) {
-		this.x = x;
-		this.y = y;
-		this.z = z;
-	}
-	
-	/**  Helper functions for math functions  **/
-	private float sumOfSquares(float x, float y, float z) {
-		float sumOfSquares = (x*x + y*y + z*z);		
-		return sumOfSquares;
 	}
 }

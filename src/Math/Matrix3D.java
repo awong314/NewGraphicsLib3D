@@ -1,7 +1,5 @@
 package Math;
 
-import java.util.Vector;
-
 public class Matrix3D {
 	private static Major major = Major.ROW;
 	private float[] values;

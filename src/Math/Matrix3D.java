@@ -73,37 +73,37 @@ public class Matrix3D {
 	}
 
 	public float elementAt(int row, int col) {
-	    /*TODO*/
+	    /*TODO Derek*/
         return 0;
     }
 
     public Vector3D getCol(int col) {
-        /*TODO*/
+        /*TODO Derek*/
         return null;
     }
 
     public Vector3D getRow(int row) {
-        /*TODO*/
+        /*TODO Derek*/
         return null;
     }
 
     public Matrix3D inverse() {
-	    /*TODO Return new instance*/
+	    /*TODO Derek Return new instance*/
         return null;
     }
 
     public Matrix3D invert() {
-	    /*TODO Mutate current*/
+	    /*TODO Derek Mutate current*/
         return null;
     }
 
     public Matrix3D rotate(float xAmt, float yAmt, float zAmt) {
-        /*TODO Mutate current*/
+        /*TODO Derek Mutate current*/
 	    return null;
     }
 
     public Matrix3D rotate(float degrees, Vector3D axis) {
-        /*TODO Mutate current*/
+        /*TODO Derek Mutate current*/
         return null;
     }
 
@@ -157,10 +157,12 @@ public class Matrix3D {
 	}
 	
 	public Matrix3D mult(Matrix3D mat2) {
+		/*TODO Derek*/
 		return null;
 	}
 	
 	public Matrix3D mult(Vector3D vec2) {
+		/*TODO Derek*/
 		return null;
 	}
 	

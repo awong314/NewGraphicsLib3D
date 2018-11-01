@@ -20,9 +20,7 @@ public class Vector3D {
 	/**  The methods below will mutate the instance as well as return it **/
 	
 	public Vector3D normalize() {
-		this.x /= this.getMagnitude();
-		this.y /= this.getMagnitude();
-		this.z /= this.getMagnitude();
+		this.setDirection(this.x / this.getMagnitude(), this.y / this.getMagnitude(),	this.z / this.getMagnitude());
 		return this;
 	}
 	

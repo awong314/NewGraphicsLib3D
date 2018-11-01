@@ -1,34 +1,65 @@
 package Math;
 
+import java.util.Vector;
+
 public class Matrix3D {
 	private static Major major = Major.ROW;
-	private double[] values;
+	private float[] values;
 	
 	public Matrix3D() {
-		this.values = new double[] {
-		        1.0, 0.0, 0.0, 0.0,
-                0.0, 1.0, 0.0, 0.0,
-                0.0, 0.0, 1.0, 0.0,
-                0.0, 0.0, 0.0, 1.0
+		this.values = new float[] {
+		        1.0f, 0.0f, 0.0f, 0.0f,
+                0.0f, 1.0f, 0.0f, 0.0f,
+                0.0f, 0.0f, 1.0f, 0.0f,
+                0.0f, 0.0f, 0.0f, 1.0f
         };
 	}
-	
-	public Matrix3D(float[] mat) {
-		for (float f: mat) {
+
+	public Matrix3D(float[] matrix) {
+		for (float f: matrix) {
 
         }
 	}
 
-    public Matrix3D(double[] mat) {
-        for (double f: mat) {
-
-        }
+    public Matrix3D(Vector3D x, Vector3D y, Vector3D z) {
+	    /*TODO*/
     }
-	
+
+    public Matrix3D createRotationMatrix(float degrees, Vector3D axis) {
+	    /*TODO*/
+	    return null;
+	}
+
+	public Matrix3D createRotationMatrix(float amtX, float amtY, float amtZ) {
+	    /*TODO*/
+        return null;
+	}
+
+    public Matrix3D createScalingMatrix(float amtX, float amtY, float amtZ) {
+	    /*TODO*/
+	    return null;
+	}
+
+    public Matrix3D createTranslationMatrix(float amtX, float amtY, float amtZ) {
+        /*TODO*/
+        return null;
+    }
+
+    public Matrix3D createProjectionMatrix(float fov, float width, float height, float near, float far) {
+        /*TODO*/
+        return null;
+    }
+
+    public Matrix3D createCameraMatrix(Vector3D forward, Vector3D up) {
+        /*TODO*/
+        return null;
+    }
+
+	//TODO Fix math
 	public Matrix3D add(Matrix3D mat2) {
-		double[] mat1Floats = this.getDoubleValues();
-		double[] mat2Floats = mat2.getDoubleValues();
-		double[] temp = new double[mat1Floats.length];
+		float[] mat1Floats = this.getValues();
+        float[] mat2Floats = mat2.getValues();
+        float[] temp = new float[mat1Floats.length];
 		
 		if (mat1Floats.length == mat2Floats.length) {
 			for (int i=0; i<mat1Floats.length; i++) {
@@ -42,7 +73,87 @@ public class Matrix3D {
 		
 		return new Matrix3D(temp);
 	}
-	
+
+	public float elementAt(int row, int col) {
+	    /*TODO*/
+        return 0;
+    }
+
+    public Vector3D getCol(int col) {
+        /*TODO*/
+        return null;
+    }
+
+    public Vector3D getRow(int row) {
+        /*TODO*/
+        return null;
+    }
+
+    public Matrix3D inverse() {
+	    /*TODO Return new instance*/
+        return null;
+    }
+
+    public Matrix3D invert() {
+	    /*TODO Mutate current*/
+        return null;
+    }
+
+    public Matrix3D rotate(float xAmt, float yAmt, float zAmt) {
+        /*TODO Mutate current*/
+	    return null;
+    }
+
+    public Matrix3D rotate(float degrees, Vector3D axis) {
+        /*TODO Mutate current*/
+        return null;
+    }
+
+    public Matrix3D rotateX(float degrees) {
+        /*TODO Mutate current*/
+        return null;
+    }
+
+    public Matrix3D rotateY(float degrees) {
+        /*TODO Mutate current*/
+        return null;
+    }
+
+    public Matrix3D rotateZ(float degrees) {
+        /*TODO Mutate current*/
+        return null;
+    }
+
+    public Matrix3D scale(float xAmt, float yAmt, float zAmt) {
+        /*TODO Mutate current*/
+	    return null;
+    }
+
+    public Matrix3D translate(float xAmt, float yAmt, float zAmt) {
+        /*TODO Mutate current*/
+        return null;
+    }
+
+    public Matrix3D transpose() {
+        /*TODO Mutate current*/
+        return null;
+    }
+
+    public Matrix3D setCol(int col, Vector3D vector) {
+        /*TODO Mutate current*/
+	    return null;
+    }
+
+    public Matrix3D setRow(int row, Vector3D vector) {
+        /*TODO Mutate current*/
+        return null;
+    }
+
+    public Matrix3D setElementAt(int row, int col, float value) {
+        /*TODO Mutate current*/
+        return null;
+    }
+
 	public Matrix3D sub(Matrix3D mat2) {
 		return null;
 	}
@@ -59,18 +170,9 @@ public class Matrix3D {
 		return null;
 	}
 	
-	public float[] getFloatValues() {
-		float[] temp = new float[16];
-		int i=0;
-        for (double d: this.values) {
-            temp[i] = (float)d;
-		}
-		return temp;
-	}
-	
-	public double[] getDoubleValues() {
+	public float[] getValues() {
         return this.values;
-	}
+    }
 	
 	public static void setMajor(Major major) {
 		Matrix3D.major = major;
@@ -82,9 +184,9 @@ public class Matrix3D {
 	
 	public String toString() {
 		return "This is a 4x4 matrix with the values: \n" +
-				this.values[0][0] + " " + this.values[0][1] + " " + this.values[0][2] + this.values[0][3] + "\n" +
-				this.values[1][0] + " " + this.values[1][1] + " " + this.values[1][2] + this.values[1][3] + "\n" +
-				this.values[2][0] + " " + this.values[2][1] + " " + this.values[2][2] + this.values[2][3] + "\n" +
-				this.values[3][0] + " " + this.values[3][1] + " " + this.values[3][2] + this.values[3][3] + "\n";
+				this.values[0]  + " " + this.values[1]  + " " + this.values[2]  + this.values[3]  + "\n" +
+				this.values[4]  + " " + this.values[5]  + " " + this.values[6]  + this.values[7]  + "\n" +
+				this.values[8]  + " " + this.values[9]  + " " + this.values[10] + this.values[11] + "\n" +
+				this.values[12] + " " + this.values[13] + " " + this.values[14] + this.values[15] + "\n";
 	}
 }

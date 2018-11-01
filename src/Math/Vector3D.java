@@ -20,61 +20,52 @@ public class Vector3D {
 	/**  The methods below will mutate the instance as well as return it **/
 	
 	public Vector3D normalize() {
-		float temp = this.mag(); //store initial magnitude of vector to divide x,y,z
-		this.setX(getX() / temp);
-		this.setY(getY() / temp);
-		this.setZ(getZ() / temp);
+		this.x /= this.getMagnitude();
+		this.y /= this.getMagnitude();
+		this.z /= this.getMagnitude();
 		return this;
 	}
 	
 	public Vector3D scale(float scalar) {
-		this.setX(getX() * scalar);
-		this.setY(getY() * scalar);
-		this.setZ(getZ() * scalar);
+		this.x *= scalar;
+		this.y *= scalar;
+		this.z *= scalar;
 		return this;
 	}
 	
 	/**  The methods below will NOT mutate the instance and return new Vector3D **/
 	public Vector3D add(Vector3D vec2) {
-		Vector3D result = new Vector3D();
-		result.setX(this.x + vec2.getX());
-		result.setY(this.y + vec2.getY());
-		result.setZ(this.z + vec2.getZ());
-		return result;
+		float x = this.x + vec2.getX();
+		float y = this.y + vec2.getY();
+		float z = this.z + vec2.getZ();
+		return new Vector3D(x, y, z);
 	}
 	
 	public Vector3D sub(Vector3D vec2) {
-		Vector3D result = new Vector3D();
-		result.setX(this.x - vec2.getX());
-		result.setY(this.y - vec2.getY());
-		result.setZ(this.z - vec2.getZ());
-		return result;
+		float x = this.x - vec2.getX();
+		float y = this.y - vec2.getY();
+		float z = this.z - vec2.getZ();
+		return new Vector3D(x, y, z);
 	}
 	
 	public float dot(Vector3D vec2) {
-		float dot = ((this.getX() * vec2.getX()) + (this.getY() * vec2.getY()) + (this.getZ() * vec2.getZ()));
-		return dot;
+		return (this.x * vec2.getX()) + (this.y * vec2.getY()) + (this.z * vec2.getZ());
 	}
 	
 	public Vector3D cross(Vector3D vec2) {
-		float xX, xY, xZ;
-		xX = ((this.getY() * vec2.getZ()) - (this.getZ() * vec2.getY()));
-		xY = ((this.getZ() * vec2.getX()) - (this.getX() * vec2.getZ()));
-		xZ = ((this.getX() * vec2.getY()) - (this.getY() * vec2.getX()));
-		Vector3D cross = new Vector3D(xX, xY, xZ);
-		return cross;
+		float x = this.y * vec2.getZ() - this.z * vec2.getY();
+		float y = this.z * vec2.getX() - this.x * vec2.getZ();
+		float z = this.x * vec2.getY() - this.y * vec2.getX();
+		return new Vector3D(x, y, z);
 	}
 	
-	public float mag() {
-		float mag = (float) Math.sqrt(sumOfSquares(x, y, z));
-		return mag;
+	public float getMagnitude() {
+		return (float) Math.sqrt(this.sumOfSquares(this.x, this.y, this.z));
 	}
 	
 	/** Other methods that do not mutate or return instances of the Vector class **/
-	public float angleBetween(Vector3D vec2) {
-		float angle = 0.0f;
-		angle = (float) Math.acos(((this.x * vec2.getX()) + (this.y * vec2.getY()) + (this.z * vec2.getZ())) / (this.mag() * vec2.mag()));
-		return angle;
+	public float getAngleBetween(Vector3D vec2) {
+		return (float) Math.acos((this.x * vec2.getX() + this.y * vec2.getY() + this.z * vec2.getZ()) / (this.getMagnitude() * vec2.getMagnitude()));
 	}
 	
 	public float[] getDirection() {
@@ -88,8 +79,7 @@ public class Vector3D {
 	}
 	
 	private float sumOfSquares(float x, float y, float z) {
-		float sumOfSquares = (x*x + y*y + z*z);		
-		return sumOfSquares;
+		return x*x + y*y + z*z;
 	}
 	
 	/** Getters and setters for x, y, and z values of Vector3D **/
@@ -118,6 +108,6 @@ public class Vector3D {
 	}
 	
 	public String toString() {
-		return "Vector -> (" + this.x + ", "  + this.y + ", " + this.z + ") magnitude = " + mag();
+		return "Vector3D <" + this.x + ", "  + this.y + ", " + this.z + "> With magnitude = " + this.getMagnitude();
 	}
 }

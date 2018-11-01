@@ -14,9 +14,7 @@ public class Matrix3D {
 	}
 
 	public Matrix3D(float[] matrix) {
-		for (float f: matrix) {
-
-        }
+		this.values = matrix;
 	}
 
     public Matrix3D(Vector3D x, Vector3D y, Vector3D z) {
@@ -73,13 +71,29 @@ public class Matrix3D {
 	}
 
 	public float elementAt(int row, int col) {
-	    /*TODO Derek*/
-        return 0;
+		float temp = 0;
+		if(row < 0 || row > 3 || col < 0 || col > 3) {
+			System.out.println("Invalid index entered, value must be -1 < int < 4");
+			System.exit(0);
+		}
+		else {
+			temp = this.values[(row * 4) + col];
+		}
+		return temp;
     }
 
     public Vector3D getCol(int col) {
-        /*TODO Derek*/
-        return null;
+    	Vector3D column = new Vector3D();
+        if(col < 0 || col > 3) {
+        	System.out.println("Invalid index entered, value must be -1 < int < 4");
+			System.exit(0);
+        }
+        else {
+        	column.setX(this.values[col]);
+        	column.setY(this.values[col + 4]);
+        	column.setZ(this.values[col + 8]);
+        }
+        return column;
     }
 
     public Vector3D getRow(int row) {
@@ -184,9 +198,9 @@ public class Matrix3D {
 	
 	public String toString() {
 		return "This is a 4x4 matrix with the values: \n" +
-				this.values[0]  + " " + this.values[1]  + " " + this.values[2]  + this.values[3]  + "\n" +
-				this.values[4]  + " " + this.values[5]  + " " + this.values[6]  + this.values[7]  + "\n" +
-				this.values[8]  + " " + this.values[9]  + " " + this.values[10] + this.values[11] + "\n" +
-				this.values[12] + " " + this.values[13] + " " + this.values[14] + this.values[15] + "\n";
+				this.values[0]  + " " + this.values[1]  + " " + this.values[2]  + " " + this.values[3]  + "\n" +
+				this.values[4]  + " " + this.values[5]  + " " + this.values[6]  + " " + this.values[7]  + "\n" +
+				this.values[8]  + " " + this.values[9]  + " " + this.values[10] + " " + this.values[11] + "\n" +
+				this.values[12] + " " + this.values[13] + " " + this.values[14] + " " + this.values[15] + "\n";
 	}
 }

@@ -14,13 +14,23 @@ public class Matrix3D {
 	}
 
 	public Matrix3D(float[] matrix) {
-		for (float f: matrix) {
-
-        }
+		this.values = matrix;
 	}
 
     public Matrix3D(Vector3D x, Vector3D y, Vector3D z) {
-	    /*TODO*/
+	    /*TODO test column major vector after learning to properly set value*/
+    	if(major == Major.ROW){
+    		this.values = new float[] {x.getX(), x.getY(), x.getZ(), 0.0f,
+    								   y.getX(), y.getY(), y.getZ(), 0.0f,
+    								   z.getX(), z.getY(), z.getZ(), 0.0f,
+    								   0.0f,     0.0f,     0.0f,     1.0f};
+    	}
+    	if(major == Major.COLUMN) {
+    		this.values = new float[] {x.getX(), y.getX(), z.getX(), 0.0f,
+    								   x.getY(), y.getY(), z.getY(), 0.0f,
+    								   x.getZ(), y.getZ(), z.getZ(), 0.0f,
+    								   0.0f,     0.0f,     0.0f,     1.0f};
+    	}
     }
 
     public Matrix3D createRotationMatrix(float degrees, Vector3D axis) {
@@ -73,18 +83,38 @@ public class Matrix3D {
 	}
 
 	public float elementAt(int row, int col) {
-	    /*TODO Derek*/
-        return 0;
+		if(row < 0 || row > 3 || col < 0 || col > 3) {
+			System.out.println("Matrix index out of bounds, must be an integer between 0 and 3.");
+			System.exit(0);
+			return -1;
+		}
+	    return this.values[4*row + col];
     }
 
     public Vector3D getCol(int col) {
-        /*TODO Derek*/
-        return null;
+    	switch(col) {
+    		case 0:	return new Vector3D(this.values[0], this.values[4], this.values[8]);
+    		case 1:	return new Vector3D(this.values[1], this.values[5], this.values[9]);
+    		case 2:	return new Vector3D(this.values[2], this.values[6], this.values[10]);
+    		case 3:	return new Vector3D(this.values[3], this.values[7], this.values[11]);
+    		default:
+    			System.out.println("Column index out of bounds, must be an integer between 0 and 3.");
+    			System.exit(0);
+    			return null;
+    	}
     }
 
     public Vector3D getRow(int row) {
-        /*TODO Derek*/
-        return null;
+    	switch(row) {
+			case 0:	return new Vector3D(this.values[0], this.values[1], this.values[2]);
+			case 1:	return new Vector3D(this.values[4], this.values[5], this.values[6]);
+			case 2:	return new Vector3D(this.values[8], this.values[9], this.values[10]);
+			case 3:	return new Vector3D(this.values[12], this.values[13], this.values[14]);
+			default:
+				System.out.println("Row index out of bounds, must be an integer between 0 and 3.");
+				System.exit(0);
+				return null;
+    	}
     }
 
     public Matrix3D inverse() {
@@ -184,9 +214,31 @@ public class Matrix3D {
 	
 	public String toString() {
 		return "This is a 4x4 matrix with the values: \n" +
-				this.values[0]  + " " + this.values[1]  + " " + this.values[2]  + this.values[3]  + "\n" +
-				this.values[4]  + " " + this.values[5]  + " " + this.values[6]  + this.values[7]  + "\n" +
-				this.values[8]  + " " + this.values[9]  + " " + this.values[10] + this.values[11] + "\n" +
-				this.values[12] + " " + this.values[13] + " " + this.values[14] + this.values[15] + "\n";
+				this.values[0]  + " " + this.values[1]  + " " + this.values[2] + " " + this.values[3]  + "\n" +
+				this.values[4]  + " " + this.values[5]  + " " + this.values[6] + " " + this.values[7]  + "\n" +
+				this.values[8]  + " " + this.values[9]  + " " + this.values[10] + " " + this.values[11] + "\n" +
+				this.values[12] + " " + this.values[13] + " " + this.values[14] + " " + this.values[15] + "\n";
+	}
+	
+	/************* Functions to get the determinant of a 4 x 4 matrix -> det3 to get determinant of 3 x 3 to be used in det4 function *************/
+	public float det3(float a, float b, float c, float d, float e, float f, float g, float h, float i) {
+		float det3 = (a*(e*i - f*h)) - (b*(d*i - f*g)) + (c*(d*h - e*g));
+		return det3;		
+	}
+	public float det4(Matrix3D matrix) {
+		float det4;
+		det4 = (this.values[0] * det3(this.values[5], this.values[6], this.values[7], this.values[9], this.values[10], this.values[11],this.values[13], this.values[14], this.values[15]))
+			- (this.values[1] * det3(this.values[4], this.values[6], this.values[7], this.values[8], this.values[10], this.values[11],this.values[12], this.values[14], this.values[15]))
+			+ (this.values[2] * det3(this.values[4], this.values[5], this.values[7], this.values[8], this.values[9], this.values[11],this.values[12], this.values[13], this.values[15]))
+			- (this.values[3] * det3(this.values[4], this.values[5], this.values[6], this.values[8], this.values[9], this.values[10],this.values[12], this.values[13], this.values[14]));
+		return det4;
+	}
+	/************* Helper functions for obtaining matrix inverse *************/
+	
+	public Matrix3D matMinors(Matrix3D matrix) {
+		return new Matrix3D();
+	}
+	public Matrix3D matCofactors(Matrix3D matrix) {
+		return matrix;
 	}
 }

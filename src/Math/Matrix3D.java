@@ -13,9 +13,13 @@ public class Matrix3D {
         };
 	}
 
-	public Matrix3D(float[] matrix) {
-	    // TODO
-//		this.values = matrix;
+	public Matrix3D(float[][] matrix) {
+		this.values[][]
+	    for(int i = 0; i < 4; i++) {
+	    	for(int j = 0; j < 4; j++) {
+	    		this.values[i][j] = matrix[i][j];
+	    	}
+	    }
 	}
 
     public Matrix3D(Vector3D xVec, Vector3D yVec, Vector3D zVec) {
@@ -106,7 +110,7 @@ public class Matrix3D {
                 System.exit(1);
             }
         }
-		return new Matrix3D(temp);
+		return null;
 	}
 
     public Matrix3D sub(Matrix3D mat2) {
@@ -127,7 +131,7 @@ public class Matrix3D {
                 System.exit(1);
             }
         }
-        return new Matrix3D(temp);
+        return null;
     }
 
 	public float elementAt(int row, int col) {
@@ -136,13 +140,11 @@ public class Matrix3D {
     }
 
     public Vector3D getCol(int col) {
-        /*TODO Derek*/
-        return null;
+    	return new Vector3D(this.values[0][col], this.values[1][col], this.values[2][col]);
     }
 
     public Vector3D getRow(int row) {
-        /*TODO Derek*/
-        return null;
+        return new Vector3D(this.values[row][0], this.values[row][1], this.values[row][3]);
     }
 
     public Matrix3D inverse() {

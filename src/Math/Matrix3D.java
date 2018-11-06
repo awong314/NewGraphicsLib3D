@@ -150,12 +150,20 @@ public class Matrix3D {
         return 0;
     }
 
-    public Vector3D getCol(int col) {
+    public Vector3D getColVector(int col) {
     	return new Vector3D(this.values[0][col], this.values[1][col], this.values[2][col]);
     }
 
-    public Vector3D getRow(int row) {
-        return new Vector3D(this.values[row][0], this.values[row][1], this.values[row][3]);
+    public Vector3D getRowVector(int row) {
+        return new Vector3D(this.values[row][0], this.values[row][1], this.values[row][2]);
+    }
+    
+    public float[] getColValues(int col) {
+    	return new float[] {this.values[0][col], this.values[1][col], this.values[2][col], this.values[3][col]};
+    }
+    
+    public float[] getRowValues(int row) {
+    	return new float[] {this.values[row][0], this.values[row][1], this.values[row][2], this.values[row][3]};
     }
 
     public Matrix3D inverse() {
@@ -257,5 +265,10 @@ public class Matrix3D {
 				this.values[1][0] + " " + this.values[1][1] + " " + this.values[1][2] + " " + this.values[1][3] + "\n" +
 				this.values[2][0] + " " + this.values[2][1] + " " + this.values[2][2] + " " + this.values[2][3] + "\n" +
 				this.values[3][0] + " " + this.values[3][1] + " " + this.values[3][2] + " " + this.values[3][3] + "\n";
+	}
+	
+	public float det3(float[][] threeByThree) {
+		
+		return 0.0f;
 	}
 }

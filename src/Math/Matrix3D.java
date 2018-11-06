@@ -232,16 +232,29 @@ public class Matrix3D {
     }
 	
 	public Matrix3D mult(Matrix3D mat2) {
-		/*TODO*/
-        IntStream.range(0, 3).forEachOrdered(n -> {
-            this.getRowValues(n);
+		float[][] temp = new float[4][4];
+        IntStream.range(0, 4).forEachOrdered(row -> {
+            IntStream.range(0, 4).forEachOrdered(col -> {
+                float[] curRow = this.getRowValues(row);
+                float[] mat2Col = mat2.getColValues(col);
+                for(int i=0; i<curRow.length; i++) {
+                    temp[row][col] += curRow[i] * mat2Col[i];
+                }
+            });
         });
-		return null;
+		return new Matrix3D(temp);
 	}
 	
-	public Matrix3D mult(Vector3D vec2) {
-		/*TODO Derek*/
-		return null;
+	public Vector3D mult(Vector3D vec) {
+        float[] temp = new float[4];
+        float[] vecValues = new float[] {vec.getX(), vec.getY(), vec.getZ(), 1};
+        IntStream.range(0, 4).forEachOrdered(row -> {
+            float[] curRow = this.getRowValues(row);
+            for(int i=0; i<curRow.length; i++) {
+                temp[i] += curRow[i] * vecValues[i];
+            }
+        });
+		return new Vector3D(temp);
 	}
 	
 	public Matrix3D cross() {
@@ -249,10 +262,12 @@ public class Matrix3D {
 	}
 	
 	public float[] getValues() {
-        return new float[] {this.values[0][0], this.values[0][1], this.values[0][2], this.values[0][3],
-        					this.values[1][0], this.values[1][1], this.values[1][2], this.values[1][3], 
-        					this.values[2][0], this.values[2][1], this.values[2][2], this.values[2][3], 
-        					this.values[3][0], this.values[3][1], this.values[3][2], this.values[3][3]};
+        return new float[] {
+                this.values[0][0], this.values[0][1], this.values[0][2], this.values[0][3],
+        		this.values[1][0], this.values[1][1], this.values[1][2], this.values[1][3],
+        		this.values[2][0], this.values[2][1], this.values[2][2], this.values[2][3],
+        		this.values[3][0], this.values[3][1], this.values[3][2], this.values[3][3]
+        };
     }
 	
 	public static String getMajor() {

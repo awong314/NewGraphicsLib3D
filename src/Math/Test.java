@@ -2,11 +2,6 @@ package Math;
 
 public class Test {
     public static void main(String[] args) {
-        Vector3D vec1 = new Vector3D(1,1,1);
-        Vector3D vec2 = new Vector3D(1,1,1);
-        System.out.println(vec1.add(vec2));
-
-        
         float[][] values = new float[][] {
             {1.0f, 2.0f, 3.0f, 4.0f},
             {5.0f, 6.0f, 7.0f, 8.0f},

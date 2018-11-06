@@ -14,7 +14,7 @@ public class Matrix3D {
 	}
 
 	public Matrix3D(float[][] matrix) {
-		this.values[][]
+		this.values = new float[][] {};
 	    for(int i = 0; i < 4; i++) {
 	    	for(int j = 0; j < 4; j++) {
 	    		this.values[i][j] = matrix[i][j];

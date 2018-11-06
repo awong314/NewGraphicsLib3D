@@ -9,10 +9,8 @@ public class Test {
             {13.0f, 14.0f, 15.0f, 16.0f}};
         Matrix3D mat1 = new Matrix3D(values);
         Matrix3D mat2 = new Matrix3D();
-
-        System.out.println(mat1.add(mat2));
-        System.out.println(mat1.sub(mat2));
         System.out.println(mat1);
+        
         
     }
 }

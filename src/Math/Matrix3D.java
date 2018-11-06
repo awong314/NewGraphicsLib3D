@@ -14,12 +14,12 @@ public class Matrix3D {
 	}
 
 	public Matrix3D(float[][] matrix) {
-		this.values = new float[][] {};
-	    for(int i = 0; i < 4; i++) {
-	    	for(int j = 0; j < 4; j++) {
-	    		this.values[i][j] = matrix[i][j];
-	    	}
-	    }
+		this.values = new float[][] {
+			{matrix[0][0], matrix[0][1], matrix[0][2], matrix[0][3]},
+			{matrix[1][0], matrix[1][1], matrix[1][2], matrix[1][3]},
+			{matrix[2][0], matrix[2][1], matrix[2][2], matrix[2][3]},
+			{matrix[3][0], matrix[3][1], matrix[3][2], matrix[3][3]}
+		};
 	}
 
     public Matrix3D(Vector3D xVec, Vector3D yVec, Vector3D zVec) {
@@ -227,9 +227,10 @@ public class Matrix3D {
 	}
 	
 	public float[] getValues() {
-        //TODO
-//        return this.values;
-        return new float[] {0};
+        return new float[] {this.values[0][0], this.values[0][1], this.values[0][2], this.values[0][3],
+        					this.values[1][0], this.values[1][1], this.values[1][2], this.values[1][3], 
+        					this.values[2][0], this.values[2][1], this.values[2][2], this.values[2][3], 
+        					this.values[3][0], this.values[3][1], this.values[3][2], this.values[3][3]};
     }
 	
 	public static String getMajor() {
@@ -238,9 +239,9 @@ public class Matrix3D {
 	
 	public String toString() {
 		return "This is a 4x4 matrix with the values: \n" +
-				this.values[0]  + " " + this.values[1]  + " " + this.values[2]  + " " + this.values[3]  + "\n" +
-				this.values[4]  + " " + this.values[5]  + " " + this.values[6]  + " " + this.values[7]  + "\n" +
-				this.values[8]  + " " + this.values[9]  + " " + this.values[10] + " " + this.values[11] + "\n" +
-				this.values[12] + " " + this.values[13] + " " + this.values[14] + " " + this.values[15] + "\n";
+				this.values[0][0] + " " + this.values[0][1] + " " + this.values[0][2] + " " + this.values[0][3] + "\n" +
+				this.values[1][0] + " " + this.values[1][1] + " " + this.values[1][2] + " " + this.values[1][3] + "\n" +
+				this.values[2][0] + " " + this.values[2][1] + " " + this.values[2][2] + " " + this.values[2][3] + "\n" +
+				this.values[3][0] + " " + this.values[3][1] + " " + this.values[3][2] + " " + this.values[3][3] + "\n";
 	}
 }

@@ -1,26 +1,25 @@
 package Math;
 
 public class Determinant {
-	private void cofactor(MatrixND) {
-		if(basecase)
-			return
+	private void cofactor(Matrix3D matrix) {
+		if(matrix.getValues().length <= 1)
+			return;
 		for each subMatrix
 			determinant(subMatrix);
 				=+-+-+-
 	}
 	
-	public float determinant(Matrix3D) {
+	public float detMat3(float[][] mat3, ) {
 		return 0.0f;
 	}
 	
-	public float determinant(Matrix2D mat2d) {
+	public float detMat2(float[][] mat2) {
 		cofactor(mat2d);
 		return 0.0f;
 	}
 	
-	public float determinant(Matrix1D) {
-		do trivial determinant for 2x2
-		return 0.0f;
+	public float detMat1(float[][] mat1) {
+		return 0.0f; //only number in matrix (possibly just return)
 	}
 	
 }

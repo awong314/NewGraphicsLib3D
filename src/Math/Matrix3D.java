@@ -241,6 +241,10 @@ public class Matrix3D {
         					this.values[3][0], this.values[3][1], this.values[3][2], this.values[3][3]};
     }
 	
+	public int size() {
+		return this.getRowValues(0).length;
+	}
+	
 	public static String getMajor() {
 		return Matrix3D.major;
 	}

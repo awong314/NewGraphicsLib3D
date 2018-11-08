@@ -160,7 +160,7 @@ public class Matrix3D {
     }
 
     public Matrix3D invert() {
-	    /*TODO Derek Mutate current*/
+	    /*TODO Derek Mutate current (inverse functin w/out new instance)*/
         return null;
     }
 
@@ -200,22 +200,33 @@ public class Matrix3D {
     }
 
     public Matrix3D transpose() {
-        /*TODO Mutate current*/
-        return null;
+        /*TODO Mutate current -> rows become columns columns become rows*/
+    	float[] temp = this.getValues();
+    	for(int i = 0; i < 4; i++) {
+    		for(int j = 0; j < 4; j++) {
+    			this.values[i][j] = temp[(i * 4 + j)];
+    		}
+    	}
+        return this;
     }
 
     public Matrix3D setCol(int col, Vector3D vector) {
-        /*TODO Mutate current*/
+    	/*TODO check if function has any value since calculations are done in row major*/
+        this.values[0][col] = vector.getX();
+        this.values[1][col] = vector.getY();
+        this.values[2][col] = vector.getZ();
 	    return null;
     }
 
     public Matrix3D setRow(int row, Vector3D vector) {
-        /*TODO Mutate current*/
+        this.values[row][0] = vector.getX();
+        this.values[row][1] = vector.getY();
+        this.values[row][2] = vector.getZ();
         return null;
     }
 
     public Matrix3D setElementAt(int row, int col, float value) {
-        /*TODO Mutate current*/
+        this.values[row][col] = value;
         return null;
     }
 	
@@ -239,10 +250,6 @@ public class Matrix3D {
         					this.values[2][0], this.values[2][1], this.values[2][2], this.values[2][3], 
         					this.values[3][0], this.values[3][1], this.values[3][2], this.values[3][3]};
     }
-	
-	public int size() {
-		return this.getRowValues(0).length;
-	}
 	
 	public static String getMajor() {
 		return Matrix3D.major;

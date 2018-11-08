@@ -135,8 +135,7 @@ public class Matrix3D {
     }
 
 	public float elementAt(int row, int col) {
-	    /*TODO Derek*/
-        return 0;
+	    return this.values[row][col];
     }
 
     public Vector3D getColVector(int col) {

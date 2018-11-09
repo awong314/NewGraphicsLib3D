@@ -24,6 +24,9 @@ public class Test {
         mat3.transpose();
         System.out.println(mat3);
         
+        Vector3D vec4 = mat3.mult(vec1);
+        System.out.println(vec4);
+        
         
     }
 }

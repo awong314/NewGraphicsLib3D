@@ -43,17 +43,29 @@ public class Matrix3D {
 	};
 
     public Matrix3D createRotationMatrix(float degrees, Vector3D axis) {
-	    /*TODO*/
-	    return null;
+    	float cosTheta = (float) Math.cos(degrees);
+    	float sinTheta = (float) Math.cos(degrees);
+    	float mCosTheta = 1.0f - cosTheta;
+    	float uX = axis.getX();
+    	float uY = axis.getY();
+    	float uZ = axis.getZ();
+    	float[][] values = new float[][] {
+            {(cosTheta + uX*uX*mCosTheta), (uX*uY*mCosTheta - uZ*sinTheta), (uX*uZ*mCosTheta + uY*sinTheta), 0.0f},
+            {(uY*uX*mCosTheta + uZ*sinTheta), (cosTheta + uY*uY*mCosTheta), (uY*uZ*mCosTheta - uX*sinTheta), 0.0f},
+            {(uZ*uX*mCosTheta - uY*sinTheta), (uZ*uY*mCosTheta + uX*sinTheta), (cosTheta + uZ*uZ*mCosTheta), 0.0f},
+            {0.0f, 0.0f, 0.0f, 1.0f}};
+	    Matrix3D rotationMatrix = new Matrix3D(values);
+	    return rotationMatrix;
 	}
 
 	public Matrix3D createRotationMatrix(float amtX, float amtY, float amtZ) {
-        this.values = new float[][] {
-                {1, 0, 0, 0},
-                {0, 1, 0, 0},
-                {0, 0, 1, 0},
-                {0, 0, 0, 1}
-        };
+        
+		Matrix3D temp = rotateX(amtX);
+        this.mult(temp);
+        temp = rotateY(amtY);
+        this.mult(temp);
+        temp = rotateZ(amtZ);
+        this.mult(temp);
         return this;
 	}
 
@@ -171,10 +183,11 @@ public class Matrix3D {
     }
 
     public Matrix3D invert() {
-	    /*TODO Derek Mutate current (inverse functin w/out new instance)*/
+	    /*TODO Derek Mutate current (inverse function w/out new instance)*/
         return null;
     }
-
+    
+    /** Functions below to be added later (apply only to current matrix, do not affect vectors **/
     public Matrix3D rotate(float xAmt, float yAmt, float zAmt) {
         /*TODO Derek Mutate current*/
 	    return null;
@@ -185,31 +198,17 @@ public class Matrix3D {
         return null;
     }
 
-    public Matrix3D rotateX(float degrees) {
-        /*TODO Derek Mutate current*/
-        return null;
-    }
-
-    public Matrix3D rotateY(float degrees) {
-        /*TODO Derek Mutate current*/
-        return null;
-    }
-
-    public Matrix3D rotateZ(float degrees) {
-        /*TODO Derek Mutate current*/
-        return null;
-    }
-
-    public Matrix3D scale(float xAmt, float yAmt, float zAmt) {
+        public Matrix3D scale(float xAmt, float yAmt, float zAmt) {
         /*TODO Mutate current*/
 	    return null;
     }
 
     public Matrix3D translate(float xAmt, float yAmt, float zAmt) {
         /*TODO Mutate current*/
-        return null;
+        return this;
     }
-
+    /** End section **/
+    
     public Matrix3D transpose() {
     	float[] temp = this.getValues();
     	for(int i = 0; i < 4; i++) {
@@ -221,7 +220,6 @@ public class Matrix3D {
     }
 
     public Matrix3D setCol(int col, Vector3D vector) {
-    	/*TODO check if function has any value since calculations are done in row major*/
         this.values[0][col] = vector.getX();
         this.values[1][col] = vector.getY();
         this.values[2][col] = vector.getZ();
@@ -266,10 +264,33 @@ public class Matrix3D {
 		return new Vector3D(temp);
 	}
 	
-	public Matrix3D cross() {
-		return null;
-	}
-	
+	public Matrix3D rotateX(float degrees) {
+        Matrix3D xRot = new Matrix3D();
+        xRot.setElementAt(1, 1, (float) Math.cos(degrees));
+        xRot.setElementAt(1, 2, (float) -Math.sin(degrees));
+        xRot.setElementAt(2, 1, (float) Math.sin(degrees));
+        xRot.setElementAt(2, 2, (float) Math.cos(degrees));
+        return xRot;
+    }
+
+    public Matrix3D rotateY(float degrees) {
+    	Matrix3D yRot = new Matrix3D();
+        yRot.setElementAt(0, 0, (float) Math.cos(degrees));
+        yRot.setElementAt(0, 2, (float) Math.sin(degrees));
+        yRot.setElementAt(2, 0, (float) -Math.sin(degrees));
+        yRot.setElementAt(2, 2, (float) Math.cos(degrees));
+        return yRot;
+    }
+
+    public Matrix3D rotateZ(float degrees) {
+    	Matrix3D zRot = new Matrix3D();
+        zRot.setElementAt(0, 0, (float) Math.cos(degrees));
+        zRot.setElementAt(0, 1, (float) -Math.sin(degrees));
+        zRot.setElementAt(1, 0, (float) Math.sin(degrees));
+        zRot.setElementAt(1, 1, (float) Math.cos(degrees));
+        return zRot;
+    }
+
 	public float[] getValues() {
         return new float[] {
                 this.values[0][0], this.values[0][1], this.values[0][2], this.values[0][3],

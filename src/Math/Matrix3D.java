@@ -1,5 +1,7 @@
 package Math;
 
+import java.util.stream.IntStream;
+
 public class Matrix3D {
 	private static final String major = "ROW";
 	private float[][] values;
@@ -21,6 +23,15 @@ public class Matrix3D {
 			{matrix[3][0], matrix[3][1], matrix[3][2], matrix[3][3]}
 		};
 	}
+
+    public Matrix3D(float[] matrix) {
+        this.values = new float[][] {
+                {matrix[0],  matrix[1],  matrix[2],  matrix[3]},
+                {matrix[4],  matrix[5],  matrix[6],  matrix[7]},
+                {matrix[8],  matrix[9],  matrix[10], matrix[11]},
+                {matrix[12], matrix[13], matrix[14], matrix[15]}
+        };
+    }
 
     public Matrix3D(Vector3D xVec, Vector3D yVec, Vector3D zVec) {
         this.values = new float[][] {
@@ -49,9 +60,9 @@ public class Matrix3D {
     public Matrix3D createScalingMatrix(float amtX, float amtY, float amtZ) {
         this.values = new float[][] {
                 {amtX,  0,   0,  0},
-                {0,   amtY,  0,  0},
-                {0,     0, amtZ, 0},
-                {0,     0,   0,  1}
+                {  0, amtY,  0,  0},
+                {  0,   0, amtZ, 0},
+                {  0,   0,   0,  1}
         };
         return this;
 	}
@@ -110,7 +121,7 @@ public class Matrix3D {
                 System.exit(1);
             }
         }
-		return null;
+		return new Matrix3D(temp);
 	}
 
     public Matrix3D sub(Matrix3D mat2) {
@@ -131,7 +142,7 @@ public class Matrix3D {
                 System.exit(1);
             }
         }
-        return null;
+        return new Matrix3D(temp);
     }
 
 	public float elementAt(int row, int col) {
@@ -175,17 +186,17 @@ public class Matrix3D {
     }
 
     public Matrix3D rotateX(float degrees) {
-        /*TODO Mutate current*/
+        /*TODO Derek Mutate current*/
         return null;
     }
 
     public Matrix3D rotateY(float degrees) {
-        /*TODO Mutate current*/
+        /*TODO Derek Mutate current*/
         return null;
     }
 
     public Matrix3D rotateZ(float degrees) {
-        /*TODO Mutate current*/
+        /*TODO Derek Mutate current*/
         return null;
     }
 
@@ -231,13 +242,29 @@ public class Matrix3D {
     }
 	
 	public Matrix3D mult(Matrix3D mat2) {
-		/*TODO Derek*/
-		return null;
+		float[][] temp = new float[4][4];
+        IntStream.range(0, 4).forEachOrdered(row -> {
+            IntStream.range(0, 4).forEachOrdered(col -> {
+                float[] curRow = this.getRowValues(row);
+                float[] mat2Col = mat2.getColValues(col);
+                for(int i=0; i<curRow.length; i++) {
+                    temp[row][col] += curRow[i] * mat2Col[i];
+                }
+            });
+        });
+		return new Matrix3D(temp);
 	}
 	
-	public Matrix3D mult(Vector3D vec2) {
-		/*TODO Derek*/
-		return null;
+	public Vector3D mult(Vector3D vec) {
+        float[] temp = new float[4];
+        float[] vecValues = new float[] {vec.getX(), vec.getY(), vec.getZ(), 1};
+        IntStream.range(0, 4).forEachOrdered(row -> {
+            float[] curRow = this.getRowValues(row);
+            for(int i=0; i<curRow.length; i++) {
+                temp[i] += curRow[i] * vecValues[i];
+            }
+        });
+		return new Vector3D(temp);
 	}
 	
 	public Matrix3D cross() {
@@ -245,10 +272,12 @@ public class Matrix3D {
 	}
 	
 	public float[] getValues() {
-        return new float[] {this.values[0][0], this.values[0][1], this.values[0][2], this.values[0][3],
-        					this.values[1][0], this.values[1][1], this.values[1][2], this.values[1][3], 
-        					this.values[2][0], this.values[2][1], this.values[2][2], this.values[2][3], 
-        					this.values[3][0], this.values[3][1], this.values[3][2], this.values[3][3]};
+        return new float[] {
+                this.values[0][0], this.values[0][1], this.values[0][2], this.values[0][3],
+        		this.values[1][0], this.values[1][1], this.values[1][2], this.values[1][3],
+        		this.values[2][0], this.values[2][1], this.values[2][2], this.values[2][3],
+        		this.values[3][0], this.values[3][1], this.values[3][2], this.values[3][3]
+        };
     }
 	
 	public static String getMajor() {

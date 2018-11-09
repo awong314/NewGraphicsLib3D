@@ -16,7 +16,13 @@ public class Vector3D {
 		this.y = y;
 		this.z = z;
 	}
-	
+
+	public Vector3D(float[] values) {
+		this.x = values[0];
+		this.y = values[1];
+		this.z = values[2];
+	}
+
 	/**  The methods below will mutate the instance as well as return it **/
 	
 	public Vector3D normalize() {

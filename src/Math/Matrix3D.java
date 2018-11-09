@@ -211,11 +211,10 @@ public class Matrix3D {
     }
 
     public Matrix3D transpose() {
-        /*TODO Mutate current -> rows become columns columns become rows*/
     	float[] temp = this.getValues();
     	for(int i = 0; i < 4; i++) {
     		for(int j = 0; j < 4; j++) {
-    			this.values[i][j] = temp[(i * 4 + j)];
+    			this.values[j][i] = temp[(i * 4 + j)];
     		}
     	}
         return this;

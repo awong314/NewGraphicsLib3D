@@ -45,7 +45,7 @@ public class Matrix3D {
     public Matrix3D createRotationMatrix(float degrees, Vector3D axis) {
     	float cosTheta = (float) Math.cos(degrees);
     	float sinTheta = (float) Math.cos(degrees);
-    	float mCosTheta = 1.0f - cosTheta;
+    	float mCosTheta = 1.0f - cosTheta;	//removes need 4 additional parenthesis
     	float uX = axis.getX();
     	float uY = axis.getY();
     	float uZ = axis.getZ();
@@ -59,14 +59,26 @@ public class Matrix3D {
 	}
 
 	public Matrix3D createRotationMatrix(float amtX, float amtY, float amtZ) {
-        
-		Matrix3D temp = rotateX(amtX);
-        this.mult(temp);
-        temp = rotateY(amtY);
-        this.mult(temp);
-        temp = rotateZ(amtZ);
-        this.mult(temp);
-        return this;
+        float[][] valuesX = new float[][] {
+        	{1.0f, 0,0f, 0.0f, 0.0f},
+        	{0.0f, (float)Math.cos(amtX), -(float)Math.sin(amtX), 0.0f},
+        	{0.0f, (float)Math.sin(amtX), (float)Math.cos(amtX), 0.0f},
+        	{0.0f, 0.0f, 0.0f, 1.0f}};
+		float[][] valuesY = new float[][] {
+			{(float)Math.cos(amtY), 0.0f, (float)Math.sin(amtY), 0.0f},
+			{0.0f, 1.0f, 0.0f, 0.0f},
+			{-(float)Math.sin(amtY), 0.0f, (float)Math.cos(amtY), 0.0f},
+			{0.0f, 0.0f, 0.0f, 1.0f}};
+		float[][] valuesZ = new float[][] {
+			{(float)Math.cos(amtZ), -(float)Math.sin(amtZ), 0.0f, 0.0f},
+			{(float)Math.sin(amtZ), (float)Math.cos(amtZ), 0.0f, 0.0f},
+			{0.0f, 0.0f, 1.0f, 0.0f},
+			{0.0f, 0.0f, 0.0f, 1.0f}};
+		Matrix3D rotX = new Matrix3D(valuesX);
+		Matrix3D rotY = new Matrix3D(valuesY);
+		Matrix3D rotZ = new Matrix3D(valuesZ);
+		Matrix3D rotationMatrix = new Matrix3D().mult(rotX).mult(rotY).mult(rotZ);
+		return rotationMatrix;
 	}
 
     public Matrix3D createScalingMatrix(float amtX, float amtY, float amtZ) {

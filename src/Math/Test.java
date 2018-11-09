@@ -16,17 +16,6 @@ public class Test {
         System.out.println(mat1);
         System.out.println(mat2);
         
-        Matrix3D mat3 = mat1.sub(mat2);
-        System.out.println(mat3);
-        
-        mat3.transpose();
-        System.out.println(mat3);
-        mat3.transpose();
-        System.out.println(mat3);
-        
-        Vector3D vec4 = mat3.mult(vec1);
-        System.out.println(vec4);
-        
         
     }
 }

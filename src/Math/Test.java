@@ -15,7 +15,17 @@ public class Test {
         
         System.out.println(mat1);
         System.out.println(mat2);
+        Matrix3D mat3 = mat1.mult(mat2);
+        System.out.println(mat3);
+        Matrix3D mat4 = mat1.createRotationMatrix(45, vec2);
+        System.out.println(mat4);
         
-        
+        Vector3D vec4 = new Vector3D(324.482f, 4882.32f, 7899.3f);
+        vec4 = vec4.normalize();
+        System.out.println(vec4);
+        float degrees = (float) Math.toRadians(34.75);
+        Matrix3D mat5 = mat1.createRotationMatrix(degrees, vec4);
+        System.out.println(mat5);
+       
     }
 }

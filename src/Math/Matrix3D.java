@@ -44,8 +44,8 @@ public class Matrix3D {
 
     public Matrix3D createRotationMatrix(float degrees, Vector3D axis) {
     	float cos = (float) Math.cos(degrees);
-    	float sin = (float) Math.cos(degrees);
-    	float mCT = 1.0f - cos;	//rm need 4 additional parenthesis
+    	float sin = (float) Math.sin(degrees);
+    	float mCT = 1.0f - cos;	//removes need 4 additional parenthesis
     	float uX = axis.getX();
     	float uY = axis.getY();
     	float uZ = axis.getZ();
@@ -118,10 +118,10 @@ public class Matrix3D {
         float C = (2.0f * near * far) / (near - far);
 
         this.values = new float[][] {
-                {1, 0, 0, 0},
-                {0, 1, 0, 0},
-                {0, 0, 1, 0},
-                {0, 0, 0, 1}
+                {  A,  0.0f,  0.0f, 0.0f},
+                {0.0f,   q,   0.0f, 0.0f},
+                {0.0f, 0.0f,    B,    C },
+                {0.0f, 0.0f, -1.0f, 0.0f}
         };
         return this;
     }
@@ -134,11 +134,10 @@ public class Matrix3D {
     	
     	//set the vectors to the matrix now
         this.values = new float[][] {
-                {1, 0, 0, 0},
-                {0, 1, 0, 0},
-                {0, 0, 1, 0},
-                {0, 0, 0, 1}
-        };
+                {u.getX(), v.getX(), n.getX(), 0},
+                {u.getY(), v.getY(), n.getY(), 0},
+                {u.getZ(), v.getZ(), n.getZ(), 0},
+                {    0,        0,        0,    1}};
         return this;
     }
 
